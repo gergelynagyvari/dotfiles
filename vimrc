@@ -1,3 +1,8 @@
+" Vimrc configuration of Gergely Nagyvari
+
+" Coloring and syntax highlight
+colorscheme desert
+
 " Genral UI settings
 set number             " Enables the line numbers.
 set ruler              " Enables the ruler on the bottom of the screen.
@@ -10,6 +15,9 @@ set showcmd            " Displays the selection size and the partion commands.
 set ttyfast            " Improves redrawing for newer computers.
 set nostartofline      " When moving thru the lines, the cursor will try to stay in the previous columns.
 
+" Highlight current line
+set cursorline
+hi CursorLine term=bold cterm=bold
 
 " Disable backup files, you are using a version control system anyway :)
 set nobackup
@@ -35,10 +43,14 @@ set magic              " Set magic on, for regular expressions.
 set ignorecase         " Searches are Non Case-sensitive.
 set smartcase          " Overrides ignorecase, if search contains uppercase character.
 
+" Solving paste issue with comments
+set pastetoggle=
+set nosi noai
+
+" Key re-mapping and leader commands
 let mapleader="\<Space>"
 nnoremap <leader>l :source ~/.vimrc<cr>
 
 nnoremap ; :
-
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
