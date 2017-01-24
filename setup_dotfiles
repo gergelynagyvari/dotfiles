@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+#
+
+GITHUB_USERNAME=gergelynagyvari
+REPO_NAME=dotfiles
+
+# Functions
+
+# Setup script
+
+echo ''
+echo 'Starting setup script...'
+echo ''
+ 
+if [ "$(pwd)" = "$HOME/dotfiles" ]; then 
+    echo "Not allowed to run this script from your HOME/dotfiles folder!"
+    echo ''
+    exit
+fi
+
+if [ -d "$HOME/dotfiles" ]; then 
+    while true; do
+        echo "$HOME/dotfiles folder already exist. (d)elete or (a)bort?"
+        read -n 1 action
+
+        case "$action" in
+            d ) echo "delete"
+                break
+                ;;
+            a ) echo "abort"
+                exit
+                ;;
+            * ) echo "wrong answer"
+                ;;
+        esac
+    done
+fi
+
