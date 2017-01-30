@@ -1,0 +1,26 @@
+# .bashrc
+
+# User specific aliases and functions
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias tmux='tmux -2'
+alias la='ls -hal'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+function gedit { /usr/bin/gedit $@ >/dev/null 2>&1 & }
+export PATH=~/bin:$PATH:$HOME/.local/bin
+alias build="~/bin/build"
+
+function ue { uex $@ >/dev/null 2>&1 & }
+function geany { /usr/bin/geany $@ >/dev/null 2>&1 & }
+alias discovery="docker cp kubelet:/usr/bin/socat ~/discovery/socat 2>/dev/null || docker cp ~/y_drive/vTAS/MT/socat kubelet:/usr/bin; kubectl port-forward tas-core 6009:6009 >/dev/null 2>&1 & sh -c \"cd ~/discovery; bin/discovery >/dev/null 2>&1 &\""
+function codeblocks { /usr/bin/codeblocks \$@ >/dev/null 2>&1 & }
+alias doublecmd="doublecmd >/dev/null 2>&1 &"
+if [ -z "$DESKTOP_SESSION" ]; then export GTK_CSD=0; export LD_PRELOAD="$LD_PRELOAD /usr/lib64/gtk3-nocsd.so"; fi
+
+complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
+
