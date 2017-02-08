@@ -6,7 +6,7 @@ GITHUB_USERNAME=gergelynagyvari
 REPO_NAME=dotfiles
 
 
-INSTALL_DIR=.dotfiles
+INSTALL_DIR=external_disk/projects/.dotfiles
 
 # Functions
 install_tmux() {
