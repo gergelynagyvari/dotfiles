@@ -1,0 +1,73 @@
+#!/bin/bash
+#
+#
+
+GITHUB_USERNAME=gergelynagyvari
+REPO_NAME=dotfiles
+
+
+INSTALL_DIR=external_disk/projects/.dotfiles
+
+# Functions
+install_tmux() {
+    echo "--- Configuring tmux ---"
+    sudo yum -y install tmux
+    cp -fs $HOME/$INSTALL_DIR/tmux/tmux.conf $HOME/.tmux.conf
+}
+
+install_vim() {
+    echo "--- Configuring vim ---"
+    sudo yum -y install vim
+    cp -fs $HOME/$INSTALL_DIR/vim/vimrc $HOME/.vimrc
+}
+
+get_files_and_config() {
+    echo "--- Cloning configuration files ---"
+    git clone https://github.com/gergelynagyvari/dotfiles.git $INSTALL_DIR
+    cd $INSTALL_DIR
+    git checkout install
+    git pull
+}
+
+
+# Setup script
+
+echo '------------------------------------------------------------'
+echo 'Starting setup script...'
+echo '------------------------------------------------------------'
+ 
+if [ "$(pwd)" = "$HOME/$INSTALL_DIR" ]; then 
+    echo "Not allowed to run this script from your HOME/dotfiles folder!"
+    echo ''
+    exit
+fi
+
+if [ -d "$HOME/$INSTALL_DIR" ]; then 
+    while true; do
+        echo "Existing configuration is detected in the following folder:"
+        echo "$HOME/$INSTALL_DIR"
+        echo "It must be removed to continue. (d)elete it or (a)bort?"
+
+        read -n 1 action
+
+        case "$action" in
+            d ) echo "Deleting previous configuration ($HOME/$INSTALL_DIR)"
+                rm -rf $HOME/$INSTALL_DIR
+                break
+                ;;
+            a ) echo "Aborting exectution"
+                exit
+                ;;
+            * ) echo "Wrong answer, chose one from above."
+                ;;
+        esac
+    done
+fi
+
+get_files_and_config
+install_tmux
+install_vim
+
+echo '------------------------------------------------------------'
+echo 'Finished setup script.'
+echo '------------------------------------------------------------'
