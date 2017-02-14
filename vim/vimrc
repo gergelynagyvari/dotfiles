@@ -25,10 +25,10 @@ set nowritebackup
 set noswapfile
 
 " Tab management
-set tabstop=2          " How many spaces takes a tab character.
-set softtabstop=2      " The number of spaces a tab character counts for.
+set tabstop=4          " How many spaces takes a tab character.
+set softtabstop=4      " The number of spaces a tab character counts for.
 set expandtab          " Use spaces instead of tabs for indenting.
-set shiftwidth=2       " Autoindent width.
+set shiftwidth=4       " Autoindent width.
 set smarttab           " A tab executes automatic indentation in insert mode.
 set smartindent        " Adds automatic indentation on new line.
 set autoindent         " Adds automatic indentation on copy paste as well.
