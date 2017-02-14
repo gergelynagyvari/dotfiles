@@ -31,7 +31,7 @@ get_files_and_config() {
 
 expand_bashrc() {
     echo "--- Expanding bashrc of user ---"
-    cat $INSTALL_DIR/bashrc/bashrc >>~/.bashrc
+    cat $HOME/$INSTALL_DIR/bashrc/bashrc >>~/.bashrc
     echo "New bashrc config:"
     cat ~/.bashrc
 }
