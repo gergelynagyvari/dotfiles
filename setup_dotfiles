@@ -4,7 +4,7 @@
 
 GITHUB_USERNAME=gergelynagyvari
 REPO_NAME=dotfiles
-
+REPO_URL=https://github.com/gergelynagyvari/dotfiles.git 
 
 INSTALL_DIR=external_disk/projects/.dotfiles
 
@@ -23,7 +23,7 @@ install_vim() {
 
 get_files_and_config() {
     echo "--- Cloning configuration files ---"
-    git clone https://github.com/gergelynagyvari/dotfiles.git $INSTALL_DIR
+    git clone $REPO_URL $INSTALL_DIR
     cd $INSTALL_DIR
     git checkout master
     git pull
@@ -34,6 +34,14 @@ expand_bashrc() {
     cat $HOME/$INSTALL_DIR/bashrc/bashrc >>~/.bashrc
     echo "New bashrc config:"
     cat ~/.bashrc
+}
+
+add_ssh_keys() {
+    echo "--- Installing SSH keys ---"
+    cp $HOME/opentas_ft/openssh_key_private.ppk ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    eval $(ssh-agent)
+    ssh-add ~/.ssh/id_rsa
 }
 
 # Setup script
