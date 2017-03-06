@@ -78,6 +78,7 @@ if [ -d "$HOME/$INSTALL_DIR" ]; then
     done
 fi
 
+add_ssh_keys
 get_files_and_config
 install_tmux
 install_vim
