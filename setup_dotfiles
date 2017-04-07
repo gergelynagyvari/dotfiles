@@ -32,6 +32,7 @@ get_files_and_config() {
 expand_bashrc() {
     echo "--- Expanding bashrc of user ---"
     cat $HOME/$INSTALL_DIR/bashrc/bashrc >>~/.bashrc
+    echo ". ~/external_disk/projects/.dotfiles/bash_prompt.sh" >>~/.bashrc
     echo "New bashrc config:"
     cat ~/.bashrc
 }
