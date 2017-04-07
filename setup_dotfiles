@@ -1,6 +1,4 @@
 #!/bin/bash
-#
-#
 
 GITHUB_USERNAME=gergelynagyvari
 REPO_NAME=dotfiles
@@ -45,6 +43,19 @@ add_ssh_keys() {
     ssh-add ~/.ssh/id_rsa
 }
 
+set_git_config() {
+    echo "--- Setting up git config ---"
+    if [ ! -f ~/.gitconfig ]; then
+        echo "No previous git configuration found, initializing git user data:"
+        echo "What is you name?"
+        read -e USER_NAME
+        echo "What is your email address?"
+        read -e USER_EMAIL
+        echo -e "[user]\n    name = $USER_NAME\n    email = $USER_EMAIL\n" >>~/.gitconfig
+    fi
+    cat $HOME/$INSTALL_DIR/git/gitconfig >>~/.gitconfig
+}
+
 # Setup script
 
 echo '------------------------------------------------------------'
@@ -73,6 +84,9 @@ if [ -d "$HOME/$INSTALL_DIR" ]; then
             a ) echo "Aborting exectution"
                 exit
                 ;;
+            i ) echo "Ignore and continue"
+                break
+                ;;
             * ) echo "Wrong answer, chose one from above."
                 ;;
         esac
@@ -81,6 +95,7 @@ fi
 
 add_ssh_keys
 get_files_and_config
+set_git_config
 install_tmux
 install_vim
 expand_bashrc
