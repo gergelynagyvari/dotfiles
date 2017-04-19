@@ -58,11 +58,11 @@ function set_git_branch {
 
 # Return the prompt symbol to use, colorized based on the return value of the
 # previous command.
-function set_prompt_symbol () {
+function set_prompt_color () {
   if test $1 -eq 0 ; then
-      PROMPT_SYMBOL="\$"
+      PROMPT_COLOR="${GREEN}"
   else
-      PROMPT_SYMBOL="${LIGHT_RED}\$${COLOR_NONE}"
+      PROMPT_COLOR="${LIGHT_RED}"
   fi
 }
 
@@ -70,7 +70,7 @@ function set_prompt_symbol () {
 function set_bash_prompt () {
   # Set the PROMPT_SYMBOL variable. We do this first so we don't lose the
   # return value of the last command.
-  set_prompt_symbol $?
+  set_prompt_color $?
 
   # Set the BRANCH variable.
   if is_git_repository ; then
@@ -80,7 +80,7 @@ function set_bash_prompt () {
   fi
 
   # Set the bash prompt variable.
-  PS1="[${GREEN}\u@ ${COLOR_NONE}\w ${BRANCH}]${PROMPT_SYMBOL} "
+  PS1="[${GREEN}\u@${BLUE}\h:${COLOR_NONE}\w${BRANCH}${COLOR_NONE}]${PROMPT_COLOR}\$${COLOR_NONE} "
 }
 
 # Tell bash to execute this function just before displaying its prompt.
