@@ -45,14 +45,21 @@ add_ssh_keys() {
 
 set_git_config() {
     echo "--- Setting up git config ---"
-    if [ ! -f ~/.gitconfig ]; then
-        echo "No previous git configuration found, initializing git user data:"
-        echo "What is you name?"
-        read -e USER_NAME
-        echo "What is your email address?"
-        read -e USER_EMAIL
-        echo -e "[user]\n    name = $USER_NAME\n    email = $USER_EMAIL\n" >>~/.gitconfig
+    if [ ! $(git config --get user.name) ]; then
+        echo "Enter your full name: ";
+        read -e GIT_USER_NAME
+        git config --global user.name ${GIT_USER_NAME}
     fi
+
+    if [ ! $(git config --get user.email) ]; then
+        echo "Enter your email address: ";
+        read -e GIT_USER_EMAIL
+        git config --global user.email ${GIT_USER_EMAIL}
+    fi
+
+    git config --global merge.tool kdiff3
+    git config --global mergetool.keepBackup false
+
     cat $HOME/$INSTALL_DIR/git/gitconfig >>~/.gitconfig
 }
 
